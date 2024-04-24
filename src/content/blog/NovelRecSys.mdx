@@ -12,26 +12,14 @@ title: NovelRecSys
 ---
 
 ```shell
-# elasticsearch
+# elasticsearch:8.13.0
 
-# 构建docker
-docker run -d --name es --net RecSys -p 9200:9200 -e "discovery.type=single-node" \
--e "xpack.security.enrollment.enabled=true" -v es-data:/usr/share/elasticsearch/data \
--v es-plugins:/usr/share/elasticsearch/plugins elasticsearch:8.12.2
+# 运行容器
+docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -v es-data:/usr/share/elasticsearch/data -v es-plugins:/usr/share/elasticsearch/plugins elasticsearch:8.13.0
 
 # 更改密码
 docker exec -it es /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic -i
 
-# 设置环境变量
-export ELASTIC_PASSWORD="your_password"
-
 # 尝试访问
-curl -u elastic:$ELASTIC_PASSWORD http://172.19.6.77:9200
-```
-
-```shell
-# kibana
-
-
-docker run --name kib --net RecSys -d -p 5601:5601 kibana:8.12.2
+curl -u elastic:$PASSWORD http://172.19.6.77:9200
 ```
