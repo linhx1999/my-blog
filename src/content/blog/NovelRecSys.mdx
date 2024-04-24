@@ -15,11 +15,17 @@ title: NovelRecSys
 # elasticsearch:8.13.0
 
 # 运行容器
-docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -v es-data:/usr/share/elasticsearch/data -v es-plugins:/usr/share/elasticsearch/plugins elasticsearch:8.13.0
+docker run -d --name es01 -p 9200:9200 -v /usr/share/elasticsearch/data -v /usr/share/elasticsearch/plugins elasticsearch:8.13.0
 
 # 更改密码
-docker exec -it es /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic -i
+docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic -i
+
+# 生产kibana token
+docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+
+# 复制SSL证书
+docker cp es01:/usr/share/elasticsearch/config/certs/http_ca.crt .
 
 # 尝试访问
-curl -u elastic:$PASSWORD http://172.19.6.77:9200
+curl --cacert http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200
 ```
