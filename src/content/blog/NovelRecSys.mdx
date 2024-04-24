@@ -12,10 +12,10 @@ title: NovelRecSys
 ---
 
 ```shell
-# elasticsearch:8.13.0
+# elasticsearch:8.12.2
 
 # 运行容器
-docker run -d --name es01 -p 9200:9200 -v /usr/share/elasticsearch/data -v /usr/share/elasticsearch/plugins elasticsearch:8.13.0
+docker run -d --name es01 -p 9200:9200 -v /usr/share/elasticsearch/data -v /usr/share/elasticsearch/plugins elasticsearch:8.12.2
 
 # 更改密码
 docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic -i
@@ -28,4 +28,11 @@ docker cp es01:/usr/share/elasticsearch/config/certs/http_ca.crt .
 
 # 尝试访问
 curl --cacert http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200
+```
+
+```shell
+# kibana:8.12.2
+docker pull kibana:8.12.2
+
+docker run -d --name kib01 -p 5601:5601 kibana:8.12.2
 ```
