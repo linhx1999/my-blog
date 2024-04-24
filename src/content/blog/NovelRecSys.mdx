@@ -1,0 +1,23 @@
+---
+heroImage: /src/assets/images/placeholder-about.jpg
+category: Category 1
+description: 记录构建小说推荐系统的一些命令
+pubDate: 2024-04-23T16:00:00.000Z
+draft: true
+tags:
+  - recommendation system
+  - java
+  - elasticsearch
+title: NovelRecSys
+---
+
+```shell
+docker run --name es --net RecSys -p 9200:9200 -p 9300:9300 \ 
+  -d -e "discovery.type=single-node" \
+  -v es-data:/usr/share/elasticsearch/data \
+  -v es-plugins:/usr/share/elasticsearch/plugins elasticsearch:8.12.2
+
+docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+
+export ELASTIC_PASSWORD="your_password"
+```
