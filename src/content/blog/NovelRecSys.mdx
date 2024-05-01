@@ -23,6 +23,9 @@ docker network create elastic
 # 运行容器
 docker run -d --name es01 --net elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -v /usr/share/elasticsearch/data -v /usr/share/elasticsearch/plugins elasticsearch:7.17.20
 
+# 版本8，默认开启验证
+docker run -d --name es02 -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false"  elasticsearch:8.13.0
+
 # 尝试访问
 curl http://localhost:9200
 ```
