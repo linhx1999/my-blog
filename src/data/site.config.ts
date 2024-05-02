@@ -9,11 +9,11 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	author: 'DanielCG', // Site author
-	title: 'Astro Theme OpenBlog', // Site title.
-	description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', // Description to display in the meta tags
-	lang: 'en-GB',
-	ogLocale: 'en_GB',
+	author: 'linhx1999', // Site author
+	title: 'Linhx1999 Blog', // Site title.
+	description: 'Personal blog for learning.', // Description to display in the meta tags
+	lang: 'zh-CN',
+	ogLocale: 'zh-CN',
 	shareMessage: 'Share this post', // Message to share a post on social media
 	paginationSize: 6 // Number of posts per page
 }
