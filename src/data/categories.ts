@@ -1,2 +1,2 @@
 // List of categories for blog posts
-export const CATEGORIES = ['博客相关', '学习相关'] as const
+export const CATEGORIES = ['博客', '学习', '推荐系统'] as const
