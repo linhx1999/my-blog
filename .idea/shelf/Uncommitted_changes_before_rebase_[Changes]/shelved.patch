@@ -1,0 +1,62 @@
+Index: .github/workflows/deploy.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>name: Deploy to GitHub Pages\r\n\r\non:\r\n  # 每次推送到 `main` 分支时触发这个“工作流程”\r\n  # 如果你使用了别的分支名，请按需将 `main` 替换成你的分支名\r\n  push:\r\n    branches: [ main ]\r\n  # 允许你在 GitHub 上的 Actions 标签中手动触发此“工作流程”\r\n  workflow_dispatch:\r\n\r\n# 允许 job 克隆 repo 并创建一个 page deployment\r\npermissions:\r\n  contents: read\r\n  pages: write\r\n  id-token: write\r\n\r\njobs:\r\n  build:\r\n    runs-on: ubuntu-latest\r\n    steps:\r\n      - name: Checkout your repository using git\r\n        uses: actions/checkout@v4\r\n      - name: Install, build, and upload your site\r\n        uses: withastro/action@v2\r\n        with:\r\n          # path: . # 存储库中 Astro 项目的根位置。（可选）\r\n          # node-version: 20 # 用于构建站点的特定 Node.js 版本，默认为 20。（可选）\r\n          # package-manager: pnpm@latest # 应使用哪个 Node.js 包管理器来安装依赖项和构建站点。会根据存储库中的 lockfile 自动检测。（可选）\r\n          package-manager: pnpm@latest # 应使用哪个 Node.js 包管理器来安装依赖项和构建站点。会根据存储库中的 lockfile 自动检测。（可选）\r\n\r\n  deploy:\r\n    needs: build\r\n    runs-on: ubuntu-latest\r\n    environment:\r\n      name: github-pages\r\n      url: ${{ steps.deployment.outputs.page_url }}\r\n    steps:\r\n      - name: Deploy to GitHub Pages\r\n        id: deployment\r\n        uses: actions/deploy-pages@v4
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+--- a/.github/workflows/deploy.yml	
++++ b/.github/workflows/deploy.yml	
+@@ -20,13 +20,45 @@
+     steps:
+       - name: Checkout your repository using git
+         uses: actions/checkout@v4
+-      - name: Install, build, and upload your site
+-        uses: withastro/action@v2
++      #      - name: Install, build, and upload your site
++      #        uses: withastro/action@v2
++      #        with:
++      #          # path: . # 存储库中 Astro 项目的根位置。（可选）
++      #          # node-version: 20 # 用于构建站点的特定 Node.js 版本，默认为 20。（可选）
++      #          # package-manager: pnpm@latest # 应使用哪个 Node.js 包管理器来安装依赖项和构建站点。会根据存储库中的 lockfile 自动检测。（可选）
++      #          package-manager: pnpm@latest # 应使用哪个 Node.js 包管理器来安装依赖项和构建站点。会根据存储库中的 lockfile 自动检测。（可选）
++      - name: Setup PNPM
++        uses: pnpm/action-setup@v2
+         with:
+-          # path: . # 存储库中 Astro 项目的根位置。（可选）
+-          # node-version: 20 # 用于构建站点的特定 Node.js 版本，默认为 20。（可选）
+-          # package-manager: pnpm@latest # 应使用哪个 Node.js 包管理器来安装依赖项和构建站点。会根据存储库中的 lockfile 自动检测。（可选）
+-          package-manager: pnpm@latest # 应使用哪个 Node.js 包管理器来安装依赖项和构建站点。会根据存储库中的 lockfile 自动检测。（可选）
++          version: latest
++
++      - name: Install
++        shell: "bash"
++        #        working-directory: ${{ inputs.path }}
++        working-directory: .
++        #        run: $PACKAGE_MANAGER install
++        run: pnpm install
++
++      - name: Build TinaCMS
++        env:
++          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
++          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
++        run: pnpm tinacms build
++
++      - name: Build
++        shell: "bash"
++        working-directory: .
++        run: pnpm run build
++
++      - name: Upload Pages Artifact
++        uses: actions/upload-pages-artifact@v3
++        with:
++          #          path: "${{ inputs.path }}/dist/"
++          path: "./dist/"
++
++
++
++
+ 
+   deploy:
+     needs: build

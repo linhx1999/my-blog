@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ce9ad860-fd6f-493b-a116-256146119936" name="Changes" comment="change some structure">
+      <change beforePath="$PROJECT_DIR$/src/components/Header.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/NovelRecSys.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/NovelRecSys.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/astro copy 3.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/astro copy 3.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/categories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/categories.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tina/tina-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/tina/tina-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2fGwQ4Sj8zi77iR1tGVQASOvOvr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "C:\\Users\\linhx\\Desktop\\workplace\\linhx1999.github.io\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ce9ad860-fd6f-493b-a116-256146119936" name="Changes" comment="" />
+      <created>1713440706088</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713440706088</updated>
+      <workItem from="1713440713067" duration="14630000" />
+      <workItem from="1713481743204" duration="3784000" />
+      <workItem from="1713485856090" duration="177000" />
+      <workItem from="1714556772329" duration="1644000" />
+      <workItem from="1714606711264" duration="2998000" />
+      <workItem from="1714609791586" duration="22000" />
+    </task>
+    <task id="LOCAL-00001" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713445651921</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713445651921</updated>
+    </task>
+    <task id="LOCAL-00002" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713447136653</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713447136653</updated>
+    </task>
+    <task id="LOCAL-00003" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713447291033</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713447291033</updated>
+    </task>
+    <task id="LOCAL-00004" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713447401019</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713447401019</updated>
+    </task>
+    <task id="LOCAL-00005" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713447557827</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713447557827</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713447718160</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713447718160</updated>
+    </task>
+    <task id="LOCAL-00007" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713448084328</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713448084329</updated>
+    </task>
+    <task id="LOCAL-00008" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713448728709</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1713448728709</updated>
+    </task>
+    <task id="LOCAL-00009" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713448848331</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1713448848331</updated>
+    </task>
+    <task id="LOCAL-00010" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713448919263</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1713448919263</updated>
+    </task>
+    <task id="LOCAL-00011" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713449883286</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1713449883286</updated>
+    </task>
+    <task id="LOCAL-00012" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713449988336</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713449988336</updated>
+    </task>
+    <task id="LOCAL-00013" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713450048853</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713450048853</updated>
+    </task>
+    <task id="LOCAL-00014" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713450239405</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713450239405</updated>
+    </task>
+    <task id="LOCAL-00015" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713450416155</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713450416155</updated>
+    </task>
+    <task id="LOCAL-00016" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713450766252</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1713450766252</updated>
+    </task>
+    <task id="LOCAL-00017" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713451253596</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713451253596</updated>
+    </task>
+    <task id="LOCAL-00018" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713451627693</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1713451627693</updated>
+    </task>
+    <task id="LOCAL-00019" summary="change deploy.yml">
+      <option name="closed" value="true" />
+      <created>1713452538193</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1713452538193</updated>
+    </task>
+    <task id="LOCAL-00020" summary="change config.ts">
+      <option name="closed" value="true" />
+      <created>1713452851717</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1713452851717</updated>
+    </task>
+    <task id="LOCAL-00021" summary="change gitignore">
+      <option name="closed" value="true" />
+      <created>1713481990774</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1713481990774</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix">
+      <option name="closed" value="true" />
+      <created>1713482110285</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1713482110285</updated>
+    </task>
+    <task id="LOCAL-00023" summary="build tinacms">
+      <option name="closed" value="true" />
+      <created>1713482996373</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1713482996373</updated>
+    </task>
+    <task id="LOCAL-00024" summary="build tinacms">
+      <option name="closed" value="true" />
+      <created>1713483243280</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1713483243280</updated>
+    </task>
+    <task id="LOCAL-00025" summary="build tinacms">
+      <option name="closed" value="true" />
+      <created>1713483311083</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1713483311083</updated>
+    </task>
+    <task id="LOCAL-00026" summary="change some structure">
+      <option name="closed" value="true" />
+      <created>1714609169852</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1714609169852</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change deploy.yml" />
+    <MESSAGE value="change config.ts" />
+    <MESSAGE value="change gitignore" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="Revert &quot;build: deploy Astro blog to GitHub Pages&quot;&#10;&#10;This reverts commit 9b57d694" />
+    <MESSAGE value="build tinacms" />
+    <MESSAGE value="change some structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="change some structure" />
+  </component>
+</project>
