@@ -24,7 +24,7 @@
 						"name": "category",
 						"label": "Category",
 						"description": "Select an category for this post",
-						"options": ["Category 1", "Category 2", "Category 3", "Category 4", "Category 5"],
+						"options": ["博客相关", "学习相关"],
 						"namespace": ["post", "category"],
 						"searchable": true
 					},
