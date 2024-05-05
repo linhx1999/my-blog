@@ -47,6 +47,9 @@ mysql -u root -p
 #添加远程登录用户
 CREATE USER 'name'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'name'@'%';
+```
 
-
+```shell
+# mongoDB
+docker run --name mongo7.0.9 -p 27017:27017 -v /data/mongo709/db:/data/db -d mongo:7.0.9
 ```
