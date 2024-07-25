@@ -55,4 +55,17 @@ GRANT ALL PRIVILEGES ON *.* TO 'name'@'%';
 ```shell
 # mongoDB
 docker run --name mongo7.0.9 -p 27017:27017 -v /data/mongo709/db:/data/db -d mongo:7.0.9 --no-auth
+# 创建用户
+db.createUser(
+  {
+    user: "linhx",
+    pwd: "321654987", // or cleartext password
+    roles: [
+      { role: "userAdminAnyDatabase", db: "admin" },
+      { role: "readWriteAnyDatabase", db: "admin" }
+    ]
+  }
+)
+# 验证
+db.auth("linhx", passwordPrompt())
 ```
