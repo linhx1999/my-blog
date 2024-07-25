@@ -41,11 +41,14 @@ docker run -d --name kib --net elastic -p 5601:5601 -e "ELASTICSEARCH_HOSTS=http
 # mysql
 docker run -itd -p 3306:3306 --name mysql01 -v /data/docker_v/mysql8/conf:/etc/mysql/conf.d -v /data/docker_v/mysql8/data:/var/lib/mysql --privileged=true -e MYSQL_ROOT_PASSWORD=321654987  mysql:8.0.36
 
-#登录mysql
+# 连接容器
+docker exec -it <容器id或name> mysql -uroot -p
+
+# 或登录mysql
 mysql -u root -p
 
 #添加远程登录用户
-CREATE USER 'name'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+CREATE USER 'name'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'name'@'%';
 ```
 
