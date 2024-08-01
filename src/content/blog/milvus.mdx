@@ -1,0 +1,25 @@
+---
+heroImage: /src/assets/images/4jhau2076uhb1.png
+category: 学习
+description: milvus使用记录
+pubDate: 2024-07-31T16:00:00.000Z
+draft: true
+tags:
+  - docker
+  - milvus
+title: milvus使用记录
+---
+
+[`官方docker安装参考地址`](https://milvus.io/docs/install_standalone-docker.md#Run-Milvus-in-Docker)
+
+```shell
+# 当前版本 milvusdb/milvus:v2.4.5
+# 下载脚本
+curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+
+# 运行脚本
+bash standalone_embed.sh start
+
+# 如果出错先删除再重启
+bash standalone_embed.sh delete
+```
