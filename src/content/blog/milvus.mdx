@@ -1,7 +1,7 @@
 ---
 heroImage: /src/assets/images/4jhau2076uhb1.png
 category: 学习
-description: milvus使用记录
+description: milvus使用经验
 pubDate: 2024-07-31T16:00:00.000Z
 draft: true
 tags:
@@ -9,6 +9,8 @@ tags:
   - milvus
 title: milvus使用记录
 ---
+
+## 1. 安装
 
 [`官方docker安装参考地址`](https://milvus.io/docs/install_standalone-docker.md#Run-Milvus-in-Docker)
 
@@ -22,4 +24,52 @@ bash standalone_embed.sh start
 
 # 如果出错先删除再重启
 bash standalone_embed.sh delete
+```
+
+## 2. 创建
+
+```python
+from pymilvus import connections, db
+# 创建连接，有需要可以创建数据库
+# db.create_database("my_database")
+
+# 创建连接，默认连接'default'数据库
+# connections是单例模式创建的
+connections.connect(
+    host="127.0.0.1",
+    port="19530",
+    # db_name="my_database"
+)
+
+db.list_database()
+```
+
+```python
+from pymilvus import MilvusClient
+# 创建客户端
+client = MilvusClient(
+  uri = "http://172.20.217.63:19530"
+)
+```
+
+```python
+from pymilvus import FieldSchema, DataType, CollectionSchema
+
+# 创建集合字段
+# 索引字段默认'id'，向量字段默认'vector'
+id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
+title_field = FieldSchema(name="title", dtype=DataType.VARCHAR, description="article title", max_length=200)
+embedding_field = FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=768, description="vector")
+
+# 创建集合schema
+schema = CollectionSchema(fields=[id_field, title_field, embedding_field], auto_id=False, description="desc of a collection", enable_dynamic_field=True)
+
+# 创建远程集合
+client.create_collection(
+    collection_name="title_embeddings",
+    dimension=768,
+    # metric_type="L2", # 默认'COSINE'算法
+    schema=schema
+)
+
 ```
