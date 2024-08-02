@@ -1,0 +1,119 @@
+---
+heroImage: /src/assets/images/bg.jpg
+category: 学习
+description: 记录cicd的经验
+pubDate: 2024-08-01T16:00:00.000Z
+draft: true
+title: 从零开始的github action cicd流程
+---
+
+## 从零构建cicd服务器
+
+### 0. 购买云服务器和创建github项目
+
+* [腾讯云竞价实例（按时收费）](https://buy.cloud.tencent.com/cvm?tab=custom\&step=1\&devPayMode=spotpaid\&regionId=33\&zoneId=330003\&instanceType=SA5.MEDIUM2\&platform=OpenCloudOS\&templateCreateMode=createLt\&isBackup=false\&backupDiskType=ALL\&backupDiskCustomizeValue=\&backupQuotaSegment=1\&backupQuota=1)
+
+### 1.构建服务器
+
+服务器镜像：![](</src/assets/images/屏幕截图 2024-08-02 140056.png>)
+
+### 2.创建工作流
+
+在项目根目录创建.github/workflows/actions-demo.yml
+
+在actions-demo.yml写入以下类似内容：
+
+```yaml
+# 官方参考
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+```
+
+```yaml
+# 个人项目
+name: CI/CD Pipeline for FastAPI with Poetry
+
+on:
+  push:
+    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup remote server SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_HOST: ${{ secrets.SERVER_HOST }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+#    - name: Install dependencies
+#      run: |
+#        curl -sSL https://install.python-poetry.org | python -
+#        poetry config virtualenvs.create false
+#        poetry install --no-interaction --no-root
+
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        envs: |
+          GITHUB_SHA
+          GITHUB_REF
+        script: |
+          # Create a directory for the deployment if it does not exist
+          mkdir -p ~/deployments
+          # Move to the deployment directory
+          cd ~/deployments
+          rm -rf llm_data_analysis_api
+          # Clone the repository into a new directory
+          git clone -b master --single-branch --depth 1 git@github.com:linhx1999/llm_data_analysis_api.git
+          # Change directory to the cloned repo
+          cd llm_data_analysis_api
+          # Update the submodules if you have any
+          git submodule update --init --recursive
+          
+          curl -sSL https://install.python-poetry.org | python -
+          poetry config virtualenvs.create false
+          poetry install --no-interaction --no-root
+
+          # run server
+          nohup uvicorn main:app --host 0.0.0.0 --port 80 &> /dev/null &
+```
