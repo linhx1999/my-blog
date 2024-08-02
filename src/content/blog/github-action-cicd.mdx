@@ -13,6 +13,25 @@ title: 从零开始的github action cicd流程
 
 * [腾讯云竞价实例（按时收费）](https://buy.cloud.tencent.com/cvm?tab=custom\&step=1\&devPayMode=spotpaid\&regionId=33\&zoneId=330003\&instanceType=SA5.MEDIUM2\&platform=OpenCloudOS\&templateCreateMode=createLt\&isBackup=false\&backupDiskType=ALL\&backupDiskCustomizeValue=\&backupQuotaSegment=1\&backupQuota=1)
 
+在服务器上安装数据库，并导入数据
+
+#### 0.1 安装docker
+
+[使用清华镜像安装](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/)：
+
+```shell
+export DOWNLOAD_URL="https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
+# 如您使用 curl
+# 如果下载不了可以手动复制创建脚本
+curl -fsSL https://get.docker.com/ | sh
+
+# 下载mongo镜像
+sudo docker pull mongo:7.0.12-jammy
+
+# 安装milvus向量数据库
+
+```
+
 ### 1.构建服务器
 
 服务器镜像：![](</src/assets/images/屏幕截图 2024-08-02 140056.png>)
@@ -117,3 +136,10 @@ jobs:
           # run server
           nohup uvicorn main:app --host 0.0.0.0 --port 80 &> /dev/null &
 ```
+
+### 3.设置 GitHub Secrets
+
+* SERVER\_HOST：部署服务的IP
+* SERVER\_PORT：默认端口22
+* SERVER\_NAME：登录用户名
+* SERVER\_PASSWORD：登录密码
