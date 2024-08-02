@@ -29,22 +29,6 @@ bash standalone_embed.sh delete
 ## 2. 创建
 
 ```python
-from pymilvus import connections, db
-# 创建连接，有需要可以创建数据库
-# db.create_database("my_database")
-
-# 创建连接，默认连接'default'数据库
-# connections是单例模式创建的
-connections.connect(
-    host="127.0.0.1",
-    port="19530",
-    # db_name="my_database"
-)
-
-db.list_database()
-```
-
-```python
 from pymilvus import MilvusClient
 # 创建客户端
 client = MilvusClient(
@@ -54,22 +38,83 @@ client = MilvusClient(
 
 ```python
 from pymilvus import FieldSchema, DataType, CollectionSchema
+from pprint import pprint
 
-# 创建集合字段
-# 索引字段默认'id'，向量字段默认'vector'
+# 创建集合
+# 集合名
+collection_name = "journal_title_vector"
+
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
-title_field = FieldSchema(name="title", dtype=DataType.VARCHAR, description="article title", max_length=200)
+article_id_field = FieldSchema(name="article_id", dtype=DataType.VARCHAR, description="journal article id", max_length=32)
 embedding_field = FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=768, description="vector")
 
-# 创建集合schema
-schema = CollectionSchema(fields=[id_field, title_field, embedding_field], auto_id=False, description="desc of a collection", enable_dynamic_field=True)
+schema = CollectionSchema(fields=[id_field, article_id_field, embedding_field], auto_id=False, description="journal article", enable_dynamic_field=True)
 
-# 创建远程集合
-client.create_collection(
-    collection_name="title_embeddings",
-    dimension=768,
-    # metric_type="L2", # 默认'COSINE'算法
-    schema=schema
+schema
+```
+
+```python
+# 创建索引
+# 4.1.Set up the index parameters
+index_params = MilvusClient.prepare_index_params()
+
+# 4.2.Add an index on the vector field.
+  index_params.add_index(
+    field_name = "vector",
+  )
+
+# 4.3.Create an index file
+client.create_index(
+  collection_name = collection_name,
+  index_params = index_params
+)
+```
+
+## 3. 使用
+
+```python
+# 插入数据
+data = []
+
+for i in range(len(df)):
+  data.append({
+    "id": i,
+    "article_id": df['id'][i],
+        # "title": df['title'][i],
+    "vector": title_embeddings[i].tolist()
+  })
+
+res = client.insert(
+  collection_name = collection_name,
+  data = data,
+  schema = schema
+)
+res
+```
+
+```python
+# 加载数据集
+client.load_collection(
+    collection_name=collection_name,
+    replica_number=1
 )
 
+client.get_load_state(
+    collection_name=collection_name
+)
+```
+
+```python
+# 查询
+embedding = model.encode('致一公司国际物流管理改进研究')
+res = client.search(
+  collection_name = collection_name,
+  data = [embedding.tolist()],
+  limit = 2,
+    # search_params = {
+    #     "metric_type": "L2",
+    # },
+  output_fields = ["article_id"]
+)
+res[0]
 ```
