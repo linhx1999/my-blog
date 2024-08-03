@@ -1,0 +1,35 @@
+---
+heroImage: /src/assets/images/bg.jpg
+category: 学习
+description: 安装docker
+pubDate: 2024-08-02T16:00:00.000Z
+draft: true
+title: docker安装和使用（2024.7）
+---
+
+### 参考连接:
+
+* [docker清华镜像源](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/)
+
+#### 安装:
+
+```shell
+
+export DOWNLOAD_URL = "https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
+
+# 1. download the script
+#
+curl -fsSL https://get.docker.com -o install-docker.sh
+#
+# 2. verify the script's content
+#
+cat install-docker.sh
+#
+# 3. run the script with --dry-run to verify the steps it executes
+#
+sh install-docker.sh --dry-run
+#
+# 4. run the script either as root, or using sudo to perform the installation.
+#
+sudo sh install-docker.sh
+```
