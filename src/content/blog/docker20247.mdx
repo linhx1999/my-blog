@@ -1,10 +1,10 @@
 ---
 heroImage: /src/assets/images/bg.jpg
 category: 学习
-description: 安装docker
+description: docker使用经验（2024.7）
 pubDate: 2024-08-02T16:00:00.000Z
 draft: true
-title: docker安装和使用（2024.7）
+title: docker使用经验
 ---
 
 ### 参考连接:
@@ -13,9 +13,10 @@ title: docker安装和使用（2024.7）
 
 #### 安装:
 
-```shell
+* 方法一:
 
-export DOWNLOAD_URL = "https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
+```shell
+export DOWNLOAD_URL="https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
 
 # 1. download the script
 #
@@ -32,4 +33,28 @@ sh install-docker.sh --dry-run
 # 4. run the script either as root, or using sudo to perform the installation.
 #
 sudo sh install-docker.sh
+```
+
+* 方法二:
+
+```shell
+# 先删除
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do apt-get remove $pkg; done
+
+# 安装依赖
+apt-get update
+apt-get install ca-certificates curl gnupg
+
+# 信任 Docker 的 GPG 公钥并添加仓库
+install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 安装相关软件
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
