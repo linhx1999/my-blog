@@ -11,7 +11,11 @@ title: docker使用经验
 
 * [docker清华镜像源](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/)
 
-#### 安装:
+#### 0. 预备
+
+* ubuntu 22.04
+
+#### 1. 安装:
 
 * 方法一:
 
@@ -57,4 +61,30 @@ echo \
 # 安装相关软件
 apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+#### 2. 使用:
+
+```shell
+# 以mongo为例,版本号:7.0.12-jammy
+
+# 换源
+sudo vi /etc/docker/daemon.json
+# 在daemon.json插入以下内容
+{
+  "registry-mirrors": [
+    "https://hub.uuuadc.top",
+    "https://docker.anyhub.us.kg",
+    "https://dockerhub.jobcher.com",
+    "https://dockerhub.icu",
+    "https://docker.ckyl.me",
+    "https://docker.awsl9527.cn"
+  ]
+}
+# 重启
+sudo systemctl restart docker
+
+
+# 拉取
+sudo docker pull mongo:7.0.12-jammy
 ```
