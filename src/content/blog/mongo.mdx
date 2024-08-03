@@ -3,7 +3,7 @@ heroImage: /src/assets/images/bg.jpg
 category: 学习
 description: mongo使用经验(2408)
 pubDate: 2024-08-02T16:00:00.000Z
-draft: true
+draft: false
 title: mongo使用经验
 ---
 
@@ -22,53 +22,20 @@ title: mongo使用经验
 # 拉取
 sudo docker pull mongo:7.0.12-jammy
 
-# 运行
-docker run --name mongo7_01 -v /data/docker/volumes/mongo7_01/data:/data -d -p 27017 mongo:7.0.12-jammy
+
+# 运行,并开启身份验证
+docker run -d -p 27017:27017 --name mongo7_01 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=<密码>  mongo:7.0.12-jammy
 
 ```
 
-#### 2. 开启身份验证
+#### 2. 创建普通用户(待定)
+
+参考: [https://www.mongodb.com/zh-cn/docs/manual/tutorial/create-users/](https://www.mongodb.com/zh-cn/docs/manual/tutorial/create-users/)
+
+#### 3. 使用
 
 ```shell
-# 获取容器信息
-sudo docker ps
-
-# 进入容器
-sudo docker exec -it <container_id> /bin/bash
-
-# 打开新终端，用 mongosh
-mongosh --port 27017
-
-# 切换到admin数据库
-use admin
-# 添加具有 myUserAdmin 和 userAdminAnyDatabase 角色的 readWriteAnyDatabase 用户
-db.createUser(
-  {
-    user: "linhx",
-    pwd: passwordPrompt(), // or cleartext password
-    roles: [
-      { role: "userAdminAnyDatabase", db: "admin" },
-      { role: "readWriteAnyDatabase", db: "admin" }
-    ]
-  }
-)
-
-# 关闭实例,同时也会关闭容器
-db.adminCommand( { shutdown: 1 } )
-
-# 查看全部容器,包括停止运行的
-sudo docker ps -a
-# 删除原容器
-sudo docker rm dc976f6c3d4f
-
-# 重新启动,开启身份验证
-sudo docker run --name mongo7_01 -v /data/docker/volumes/mongo7_01/data:/data -d -p 27017 mongo:7.0.12-jammy --auth
-
-```
-
-#### 3. 测试登录
-
-```shell
+创建数据库
 # 进入容器
 sudo docker exec -it <容器id>  /bin/bash
 
