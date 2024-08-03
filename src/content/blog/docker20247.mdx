@@ -63,7 +63,7 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-#### 2. 使用:
+#### 2. 换源(网络稳定可以跳过)
 
 ```shell
 # 以mongo为例,版本号:7.0.12-jammy
@@ -85,6 +85,16 @@ sudo vi /etc/docker/daemon.json
 sudo systemctl restart docker
 
 
+
+```
+
+#### 3. 使用(以mongo为例)
+
+```shell
 # 拉取
 sudo docker pull mongo:7.0.12-jammy
+
+# 运行
+docker run --name mongo7_01 -v /data/docker/volumes/mongo7_01/data:/data -d -p 27017 mongo:7.0.12-jammy
+
 ```
