@@ -7,10 +7,15 @@ draft: true
 tags:
   - docker
   - milvus
-title: milvus使用记录
+title: milvus使用经验
 ---
 
-## 1. 安装
+## 0. 准备
+
+* ubuntu 22.04
+* docker
+
+## 1. 安装和运行
 
 [`官方docker安装参考地址`](https://milvus.io/docs/install_standalone-docker.md#Run-Milvus-in-Docker)
 
@@ -26,20 +31,200 @@ bash standalone_embed.sh start
 bash standalone_embed.sh delete
 ```
 
-## 2. 创建
+### 脚本内容：
 
-```python
-from pymilvus import MilvusClient
-# 创建客户端
-client = MilvusClient(
-  uri = "http://172.20.217.63:19530"
-)
+```shell
+#!/usr/bin/env bash
+
+# Licensed to the LF AI & Data foundation under one
+# or more contributor license agreements. See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership. The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+run_embed() {
+    cat << EOF > embedEtcd.yaml
+listen-client-urls: http://0.0.0.0:2379
+advertise-client-urls: http://0.0.0.0:2379
+quota-backend-bytes: 4294967296
+auto-compaction-mode: revision
+auto-compaction-retention: '1000'
+EOF
+
+    cat << EOF > user.yaml
+# Extra config to override default milvus.yaml
+EOF
+
+    sudo docker run -d \
+        --name milvus-standalone \
+        --security-opt seccomp:unconfined \
+        -e ETCD_USE_EMBED=true \
+        -e ETCD_DATA_DIR=/var/lib/milvus/etcd \
+        -e ETCD_CONFIG_PATH=/milvus/configs/embedEtcd.yaml \
+        -e COMMON_STORAGETYPE=local \
+        -v $(pwd)/volumes/milvus:/var/lib/milvus \
+        -v $(pwd)/embedEtcd.yaml:/milvus/configs/embedEtcd.yaml \
+        -v $(pwd)/user.yaml:/milvus/configs/user.yaml \
+        -p 19530:19530 \
+        -p 9091:9091 \
+        -p 2379:2379 \
+        --health-cmd="curl -f http://localhost:9091/healthz" \
+        --health-interval=30s \
+        --health-start-period=90s \
+        --health-timeout=20s \
+        --health-retries=3 \
+        milvusdb/milvus:v2.4.5 \
+        milvus run standalone  1> /dev/null
+}
+
+wait_for_milvus_running() {
+    echo "Wait for Milvus Starting..."
+    while true
+    do
+        res=`sudo docker ps|grep milvus-standalone|grep healthy|wc -l`
+        if [ $res -eq 1 ]
+        then
+            echo "Start successfully."
+            echo "To change the default Milvus configuration, add your settings to the user.yaml file and then restart the service."
+            break
+        fi
+        sleep 1
+    done
+}
+
+start() {
+    res=`sudo docker ps|grep milvus-standalone|grep healthy|wc -l`
+    if [ $res -eq 1 ]
+    then
+        echo "Milvus is running."
+        exit 0
+    fi
+
+    res=`sudo docker ps -a|grep milvus-standalone|wc -l`
+    if [ $res -eq 1 ]
+    then
+        sudo docker start milvus-standalone 1> /dev/null
+    else
+        run_embed
+    fi
+
+    if [ $? -ne 0 ]
+    then
+        echo "Start failed."
+        exit 1
+    fi
+
+    wait_for_milvus_running
+}
+
+stop() {
+    sudo docker stop milvus-standalone 1> /dev/null
+
+    if [ $? -ne 0 ]
+    then
+        echo "Stop failed."
+        exit 1
+    fi
+    echo "Stop successfully."
+
+}
+
+delete() {
+    res=`sudo docker ps|grep milvus-standalone|wc -l`
+    if [ $res -eq 1 ]
+    then
+        echo "Please stop Milvus service before delete."
+        exit 1
+    fi
+    sudo docker rm milvus-standalone 1> /dev/null
+    if [ $? -ne 0 ]
+    then
+        echo "Delete failed."
+        exit 1
+    fi
+    sudo rm -rf $(pwd)/volumes
+    sudo rm -rf $(pwd)/embedEtcd.yaml
+    sudo rm -rf $(pwd)/user.yaml
+    echo "Delete successfully."
+}
+
+
+case $1 in
+    restart)
+        stop
+        start
+        ;;
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    delete)
+        delete
+        ;;
+    *)
+        echo "please use bash standalone_embed.sh restart|start|stop|delete"
+        ;;
+esac
 ```
 
+## 2. 启用身份验证
+
 ```python
+# 进入配置文件
+vim user.yaml
+
+# 启用身份验证
+common:
+  security:
+    authorizationEnabled: true
+
+# 重启milvus
+bash standalone_embed.sh restart
+```
+
+## 3. 登录
+
+```python
+# 用初始用户创建客户端
+from pymilvus import MilvusClient
+client = MilvusClient(
+  uri = "http://172.20.217.63:19530",
+  token="root:Milvus"
+)
+
+# 更改密码
+# update password
+
+client.update_password(
+    user_name="root",
+    old_password="Milvus",
+    new_password="321654987"
+)
+
+
 from pymilvus import FieldSchema, DataType, CollectionSchema
 from pprint import pprint
 
+
+```
+
+\\
+
+## 4. 使用
+
+```python
 # 创建集合
 # 集合名
 collection_name = "journal_title_vector"
@@ -50,7 +235,6 @@ embedding_field = FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=76
 
 schema = CollectionSchema(fields=[id_field, article_id_field, embedding_field], auto_id=False, description="journal article", enable_dynamic_field=True)
 
-schema
 ```
 
 ```python
@@ -69,8 +253,6 @@ client.create_index(
   index_params = index_params
 )
 ```
-
-## 3. 使用
 
 ```python
 # 插入数据
@@ -102,6 +284,25 @@ client.load_collection(
 client.get_load_state(
     collection_name=collection_name
 )
+```
+
+### 3. 创建集合
+
+```shell
+from pymilvus import FieldSchema, DataType, CollectionSchema
+from pprint import pprint
+
+# 创建集合
+# 集合名
+collection_name = "journal_title_vector"
+
+id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
+article_id_field = FieldSchema(name="article_id", dtype=DataType.VARCHAR, description="journal article id", max_length=32)
+embedding_field = FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=768, description="vector")
+
+schema = CollectionSchema(fields=[id_field, article_id_field, embedding_field], auto_id=False, description="journal article", enable_dynamic_field=True)
+
+schema
 ```
 
 ```python
