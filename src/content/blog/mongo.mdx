@@ -34,10 +34,34 @@ docker run -d -p 27017:27017 --name mongo7_01 -e MONGO_INITDB_ROOT_USERNAME=admi
 
 #### 3. 使用
 
+```python
+# 连接数据库
+import pandas as pd
+from pymongo import MongoClient
+
+mongo_client = MongoClient(
+    f"mongodb://{DB_USERNAME}:{DB_PASSWORD}@{SERVER_HOST}:27017"
+)
+
+# mongo_client = MongoClient(
+#     f"mongodb://109.244.159.123:27017"
+# )
+
+```
+
 ```shell
-创建数据库
-# 进入容器
-sudo docker exec -it <容器id>  /bin/bash
+# 检查连接
+# 尝试连接到MongoDB
+mongo_client.admin.command('ping')
 
+# 不需要提前创建数据库，插入数据的时候会自动创建数据库
+db = mongo_client.get_database("data_analysis")
+```
 
+```shell
+# 插入数据
+# 将DataFrame转换为字典列表
+collection = db['journal_article'] 
+# 将数据插入到MongoDB集合中
+collection.insert_many(data_dict)
 ```
