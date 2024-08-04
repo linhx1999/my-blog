@@ -59,8 +59,7 @@ db = mongo_client.get_database("data_analysis")
 ```
 
 ```shell
-# 插入数据
-# 将DataFrame转换为字典列表
+# 选择集合，和数据库一样不需要提取创建
 collection = db['journal_article'] 
 # 将数据插入到MongoDB集合中
 collection.insert_many(data_dict)
