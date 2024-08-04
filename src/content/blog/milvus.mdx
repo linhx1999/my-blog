@@ -280,25 +280,6 @@ client.get_load_state(
 )
 ```
 
-### 3. 创建集合
-
-```shell
-from pymilvus import FieldSchema, DataType, CollectionSchema
-from pprint import pprint
-
-# 创建集合
-# 集合名
-collection_name = "journal_title_vector"
-
-id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
-article_id_field = FieldSchema(name="article_id", dtype=DataType.VARCHAR, description="journal article id", max_length=32)
-embedding_field = FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=768, description="vector")
-
-schema = CollectionSchema(fields=[id_field, article_id_field, embedding_field], auto_id=False, description="journal article", enable_dynamic_field=True)
-
-schema
-```
-
 ```python
 # 查询
 embedding = model.encode('致一公司国际物流管理改进研究')
