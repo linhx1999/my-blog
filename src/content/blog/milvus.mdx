@@ -200,7 +200,7 @@ bash standalone_embed.sh restart
 # 用初始用户创建客户端
 from pymilvus import MilvusClient
 client = MilvusClient(
-  uri = "http://172.20.217.63:19530",
+  uri = "fhttp://{host}:19530",
   token="root:Milvus"
 )
 
@@ -210,24 +210,18 @@ client = MilvusClient(
 client.update_password(
     user_name="root",
     old_password="Milvus",
-    new_password="321654987"
+    new_password={password}
 )
 
 
-from pymilvus import FieldSchema, DataType, CollectionSchema
-from pprint import pprint
-
-
 ```
-
-\\
 
 ## 4. 使用
 
 ```python
 # 创建集合
 # 集合名
-collection_name = "journal_title_vector"
+collection_name = "journal_article_vector"
 
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 article_id_field = FieldSchema(name="article_id", dtype=DataType.VARCHAR, description="journal article id", max_length=32)
