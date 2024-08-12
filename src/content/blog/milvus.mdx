@@ -200,7 +200,7 @@ bash standalone_embed.sh restart
 # 用初始用户创建客户端
 from pymilvus import MilvusClient
 client = MilvusClient(
-  uri = "fhttp://{host}:19530",
+  uri = f"http://{host}:19530",
   token="root:Milvus"
 )
 
