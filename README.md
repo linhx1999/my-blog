@@ -3,38 +3,24 @@
 <img src="public/project.png" alt="Screenshot" />
 
 <hr/>
-
-<h3 align="center">
- ⭐ Leave a star if you like this project! ⭐️
-</h3>
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdanielcgilibert%2Fblog-template)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/danielcgilibert/blog-template)
-
 </div>
 
 ## 📌 Table Of Contents
 
-1. [Demo](#-Demo)
-2. [CMS](#-Tina-CMS)
-3. [Features](#-Features)
-4. [Roadmap](#-Roadmap)
-5. [Stack](#-Stack)
-6. [Running locally](#-Running-Locally)
-7. [Configure](#-Configure)
-8. [Categories](#-Adding-a-category)
-9. [Posts](#-Adding-a-post)
-10. [Draft](#-Activating-draft-mode)
-11. [FrontMatter](#-Frontmatter)
-12. [CLI](#-Commands)
-13. [Contributors](#-Contributors)
-
-## 💻 Demo
-
-Check out the [Demo](https://blog-template-gray.vercel.app/), hosted on Vercel
-<br/>
-
-https://github.com/danielcgilibert/blog-template/assets/44746462/56b8399e-cc5b-45a8-b9d2-d69833ecadb1
+- [📌 Table Of Contents](#-table-of-contents)
+- [🦙 Tina CMS](#-tina-cms)
+- [💪 Features:](#-features)
+- [🛣️ Roadmap](#️-roadmap)
+- [⚙️ Stack](#️-stack)
+- [👨🏻‍💻 Running Locally](#-running-locally)
+- [📐 Configure](#-configure)
+- [🗂️ Adding a category](#️-adding-a-category)
+- [📄 Adding a post](#-adding-a-post)
+- [📝 Activating draft mode](#-activating-draft-mode)
+- [⚡️ Frontmatter](#️-frontmatter)
+- [Required properties:](#required-properties)
+- [Optional properties:](#optional-properties)
+- [🧞 Commands](#-commands)
 
 ## 🦙 Tina CMS
 
@@ -205,9 +191,3 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm run format`       | Format codes with Prettier                                                                                                       |
 | `pnpm run sync`         | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
 | `pnpm run lint`         | Lint with ESLint                                                                                                                 |
-
-## 👋 Contributors
-
-<a href="https://github.com/danielcgilibert/blog-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=danielcgilibert/blog-template" />
-</a>
