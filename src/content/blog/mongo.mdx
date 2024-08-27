@@ -62,6 +62,11 @@ mongo_client.admin.command('ping')
 
 ```python
 
+# 查询数据库
+res = mongo_client.list_databases()
+for r in res:
+    print(r)
+
 # 不需要提前创建数据库，插入数据的时候会自动创建数据库
 db = mongo_client.get_database("data_analysis")
 # 选择集合，和数据库一样不需要提取创建
