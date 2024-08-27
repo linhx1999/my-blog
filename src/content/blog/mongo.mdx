@@ -1,7 +1,7 @@
 ---
 heroImage: /src/assets/images/MongoDB-Logo.png
 category: 学习
-description: mongo使用经验(2408)
+description: mongo使用经验
 pubDate: 2024-08-02T16:00:00.000Z
 draft: false
 tags:
@@ -13,11 +13,14 @@ title: mongo使用经验
 
 ## Mongo
 
+2024年8月版本
+
 ### 参考连接:
 
+* [docker安装](https://linhx1999.github.io/post/docker20247/)
 * [mongo身份验证](https://www.mongodb.com/zh-cn/docs/manual/tutorial/configure-scram-client-authentication/)
 
-#### 0. 预备
+#### 0. 环境
 
 * ubuntu 22.04
 * docker
@@ -28,13 +31,12 @@ title: mongo使用经验
 # 拉取
 sudo docker pull mongo:7.0.12-jammy
 
-
 # 运行,并开启身份验证
 docker run -d -p 27017:27017 --name mongo7_01 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=<密码>  mongo:7.0.12-jammy
 
 ```
 
-#### 2. 创建普通用户(待定)
+#### 2. 创建普通用户(TODO)
 
 参考: [https://www.mongodb.com/zh-cn/docs/manual/tutorial/create-users/](https://www.mongodb.com/zh-cn/docs/manual/tutorial/create-users/)
 
@@ -55,7 +57,7 @@ mongo_client = MongoClient(
 
 ```
 
-```shell
+```python
 # 检查连接
 # 尝试连接到MongoDB
 mongo_client.admin.command('ping')
@@ -64,7 +66,7 @@ mongo_client.admin.command('ping')
 db = mongo_client.get_database("data_analysis")
 ```
 
-```shell
+```python
 # 选择集合，和数据库一样不需要提取创建
 collection = db['journal_article'] 
 # 将数据插入到MongoDB集合中
