@@ -1,7 +1,7 @@
 ---
-heroImage: /src/assets/images/placeholder-hero.jpg
+heroImage: /src/assets/images/R.png
 category: 学习
-description: docker使用经验（2024.7）
+description: docker使用经验
 pubDate: 2024-08-02T16:00:00.000Z
 draft: false
 tags:
@@ -12,19 +12,45 @@ title: docker使用经验
 
 ## Docker
 
-### 参考连接:
+2024年8月份版本
+
+### 参考连接：
 
 * [docker-ce清华镜像源](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/)
 
-#### 0. 准备
+#### 0. 环境
 
 * ubuntu 22.04
 
-#### 1. 安装:
-
-* 方法一:
+#### 1. 安装
 
 ```shell
+# 方法一（推荐）：
+
+# 先删除
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+# 安装依赖
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+
+# 信任 Docker 的 GPG 公钥并添加仓库
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 安装相关软件
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+```shell
+# 方法二:
+
 export DOWNLOAD_URL="https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
 
 # 1. download the script
@@ -44,38 +70,18 @@ sh install-docker.sh --dry-run
 sudo sh install-docker.sh
 ```
 
-* 方法二（推荐）:
-
-```shell
-# 先删除
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do apt-get remove $pkg; done
-
-# 安装依赖
-apt-get update
-apt-get install ca-certificates curl gnupg
-
-# 信任 Docker 的 GPG 公钥并添加仓库
-install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-# 安装相关软件
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
-
 #### 2. 换源(网络稳定可以跳过)
 
 ```shell
 # 以mongo为例,版本号:7.0.12-jammy
 
 # 换源
-sudo vi /etc/docker/daemon.json
-# 在daemon.json插入以下内容
+sudo vim /etc/docker/daemon.json
+```
+
+在daemon.json插入以下内容：
+
+```json
 {
   "registry-mirrors": [
     "https://docker.1panel.dev",
@@ -87,17 +93,30 @@ sudo vi /etc/docker/daemon.json
     "https://docker.awsl9527.cn"
   ]
 }
+```
+
+```shell
 # 重启
 sudo systemctl restart docker
 ```
 
-#### 3. 使用(以mongo为例)
+3\. 使用
 
 ```shell
+# mongo
 # 拉取
 sudo docker pull mongo:7.0.12-jammy
+sudo docker pull hello-world
 
 # 运行
-docker run --name mongo7_01 -v /data/docker/volumes/mongo7_01/data:/data -d -p 27017 mongo:7.0.12-jammy
+sudo docker run --name mongo7_01 -v /data/docker/volumes/mongo7_01/data:/data -d -p 27017 mongo:7.0.12-jammy
+
+# hello world
+sudo docker pull hello-world
+sudo docker run hello-world
+
+# python
+sudo docker pull python:3.9.19-slim
+
 
 ```
