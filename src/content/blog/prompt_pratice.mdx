@@ -67,16 +67,24 @@ XML（Extensible Markup Language，可扩展标记语言）是一种用于存储
 
 * **将XML标签与其他技术结合使用**：如多样本提示（\<examples>）或思维链（\<thinking>、\<answer>）。这将创建超结构化、高性能的提示。
 
-#### 常用标签:
+#### 常用标签例子:
 
 ```xml
+<!-- few shots标签 -->
 <examples>
-  <example>
-    <inner />
-  </example>
+{examples}
 </examples>
 
-Use the following step-by-step <instructions> to respond to user inputs.
+
+
+<!-- 数据变量标签，可以为任意变量 -->
+使用这些data进行报告：
+<data>
+  {{SPREADSHEET_DATA}}
+</data>
+
+<!-- 指示标签，常在指示中使用其他数据变量标签 -->
+Use the following step-by-step instructions to respond to user inputs.
 <instructions>
 1. 分析以下条款：
 - 赔偿
@@ -88,13 +96,38 @@ Use the following step-by-step <instructions> to respond to user inputs.
 5. 在<recommendations>标签中列出可行的建议。
 </instructions>
 
-使用这些<data>进行报告：
-<data>
-  {{SPREADSHEET_DATA}}
-</data>
-
-使用简洁专业的语气。遵循这种<formatting_example>：
+<!-- 格式标签 -->
+输出遵循这种structure：
 <formatting_example>
   {{Q1_REPORT}}
 </formatting_example>
+
+<!-- cot标签的使用 -->
+在...之前在 <thinking> 标签中思考。首先，...。然后，...。最后，在 <answer> 标签中使用你的分析...。
+
+<!-- 多文档标签 -->
+<!-- 通常将长文档放在提示词顶部，可以提高模型输出效果 -->
+您是一位AI医生助手。您的任务是帮助医生诊断可能的患者疾病。
+<documents>
+  <document index="1">
+    <source>患者症状.txt</source>
+    <document_content>
+      {{ 患者症状 }}
+    </document_content>
+  </document>
+  <document index="2">
+    <source>患者病历.txt</source>
+    <document_content>
+      {{ 患者病历 }}
+    </document_content>
+  </document>
+  <document index="3">
+    <source>患者01_就诊历史.txt</source>
+    <document_content>
+      {{ 患者01_就诊历史 }}
+    </document_content>
+  </document>
+</documents>
+从患者病历和就诊历史中找出与诊断患者报告症状相关的引用。将这些引用放在<quotes>标签中。然后，根据这些引用，列出所有有助于医生诊断患者症状的信息。将您的诊断信息放在<info>标签中。
+
 ```
