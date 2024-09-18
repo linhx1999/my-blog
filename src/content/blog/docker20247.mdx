@@ -70,7 +70,7 @@ sh install-docker.sh --dry-run
 sudo sh install-docker.sh
 ```
 
-#### 2. 换源(网络稳定可以跳过)
+#### 2. 换源(网络稳定可以跳过)，[参考来源](https://xuanyuan.me/blog/archives/1154 "参考来源")
 
 ```shell
 # 以mongo为例,版本号:7.0.12-jammy
@@ -84,6 +84,7 @@ sudo vim /etc/docker/daemon.json
 ```json
 {
   "registry-mirrors": [
+    "https://dockerproxy.cn",
     "https://docker.1panel.dev",
     "https://hub.uuuadc.top",
     "https://docker.anyhub.us.kg",
