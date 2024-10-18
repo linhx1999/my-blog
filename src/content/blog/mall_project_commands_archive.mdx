@@ -25,6 +25,7 @@ docker run -p 3306:3306 --name mysql \
 # redis 7.4
 mkdir -p /volume/redis/etc/redis
 touch /volume/redis/etc/redis/redis.conf
+
 docker run -p 6379:6379 --name redis \
 -v /volume/redis/data:/data \
 -v /volume/redis/etc/redis:/etc/redis \
