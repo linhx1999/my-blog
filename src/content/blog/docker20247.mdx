@@ -75,13 +75,9 @@ sudo sh install-docker.sh
 ```shell
 # 以mongo为例,版本号:7.0.12-jammy
 
-# 换源
-sudo vim /etc/docker/daemon.json
-```
+sudo mkdir -p /etc/docker
 
-在daemon.json插入以下内容：
-
-```json
+sudo tee /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": [
     "https://dockerproxy.cn",
@@ -94,10 +90,10 @@ sudo vim /etc/docker/daemon.json
     "https://docker.awsl9527.cn"
   ]
 }
-```
+EOF
 
-```shell
 # 重启
+sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
