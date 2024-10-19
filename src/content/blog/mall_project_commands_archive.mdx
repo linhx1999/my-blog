@@ -12,13 +12,30 @@ title: 商城项目的配置命令存档
 ---
 
 ```shell
-# mysql 8.4
+# mysql 5.7
 
 docker run -p 3306:3306 --name mysql \
 -v /volume/mysql/var/lib/mysql:/var/lib/mysql \
 -v /volume/mysql/etc/mysql/conf.d:/etc/mysql/conf.d \
 -v /volume/mysql/var/log/mysql:/var/log/mysql \
--e MYSQL_ROOT_PASSWORD=root -d mysql:8.4
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql:5.7
+
+# my.cnf配置文件
+[mysqld]
+# 服务端使用的字符集默认为UTF8
+character-set-server=utf8
+# 配置时区
+default-time_zone='+8:00'
+
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+
+[client]
+# 设置mysql客户端连接服务端时默认使用的端口
+default-character-set=utf8
+
 ```
 
 ```shell
