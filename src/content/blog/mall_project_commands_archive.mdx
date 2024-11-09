@@ -73,11 +73,14 @@ default-time_zone='+8:00'
 
 ```shell
 # redis 7.4
-mkdir -p /volume/redis/etc/redis
-touch /volume/redis/etc/redis/redis.conf
+docker pull redis:7.4
+mkdir -p /volume/redis01/etc/redis
+touch /volume/redis01/etc/redis/redis.conf
 
-docker run -p 6379:6379 --name redis \
--v /volume/redis/data:/data \
--v /volume/redis/etc/redis:/etc/redis \
+docker run -p 6379:6379 --name redis01 \
+-v /volume/redis01/data:/data \
+-v /volume/redis01/etc/redis:/etc/redis \
 -d redis:7.4 redis-server /etc/redis/redis.conf
+
+sudo docker update redis01 --restart=always
 ```
