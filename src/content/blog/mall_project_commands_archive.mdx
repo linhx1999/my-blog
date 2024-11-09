@@ -12,6 +12,18 @@ title: 商城项目的配置命令存档
 ---
 
 ```shell
+# vagrant v2.4.2
+# virtualbox v7.0.22
+vagrant init ubuntu/jammy64 --box-version 20241002.0.0
+
+# 改配置文件为桥接模式
+config.vm.network "private_network", ip: "192.168.56.100"
+
+#启动
+vagrant up
+```
+
+```shell
 # mysql 5.7
 
 docker run -p 3306:3306 --name mysql \
