@@ -85,3 +85,17 @@ docker run -p 6379:6379 --name redis01 \
 
 sudo docker update redis01 --restart=always
 ```
+
+```shell
+# minIO
+docker run \
+   -p 9000:9000 \
+   -p 9001:9001 \
+   --name minio01 \
+   -v /volume/minio01/data:/data \
+   -e "MINIO_ROOT_USER=root" \
+   -e "MINIO_ROOT_PASSWORD=minio321654987" \
+   -d minio/minio:RELEASE.2024-11-07T00-52-20Z server /data --console-address ":9001"
+
+sudo docker update minio01 --restart=always
+```
