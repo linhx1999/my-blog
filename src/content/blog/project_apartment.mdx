@@ -24,9 +24,8 @@ docker run --name mysql01 \
 -v /volume/mysql01/etc/mysql/conf.d:/etc/mysql/conf.d \
 -v /volume/mysql01/var/log/mysql:/var/log/mysql \
 -e MYSQL_ROOT_PASSWORD=root \
+--restart=always \
 -d mysql:8.0
-
-sudo docker update mysql01 --restart=always
 
 touch /volume/mysql01/etc/mysql/conf.d/my.cnf
 vi /volume/mysql01/etc/mysql/conf.d/my.cnf
@@ -54,21 +53,20 @@ docker restart mysql01
 ```
 
 ```shell
-# redis 7.4
-docker pull redis:7.4
+# redis 6.2
+docker pull redis:6.2
 mkdir -p /volume/redis01/etc/redis
 touch /volume/redis01/etc/redis/redis.conf
 
 docker run -p 6379:6379 --name redis01 \
 -v /volume/redis01/data:/data \
 -v /volume/redis01/etc/redis:/etc/redis \
--d redis:7.4 redis-server /etc/redis/redis.conf
-
-sudo docker update redis01 --restart=always
+--restart=always \
+-d redis:6.2 redis-server /etc/redis/redis.conf
 ```
 
 ```shell
-# minIO
+# minIO RELEASE.2023-07-07T07-13-57Z
 docker run \
    -p 9000:9000 \
    -p 9001:9001 \
@@ -76,7 +74,8 @@ docker run \
    -v /volume/minio01/data:/data \
    -e "MINIO_ROOT_USER=root" \
    -e "MINIO_ROOT_PASSWORD=minio321654987" \
-   -d minio/minio:RELEASE.2024-11-07T00-52-20Z server /data --console-address ":9001"
+   --restart=always \
+   -d minio/minio:RELEASE.2023-07-07T07-13-57Z server /data --console-address ":9001"
 
 sudo docker update minio01 --restart=always
 ```
