@@ -1,0 +1,81 @@
+---
+heroImage: /src/assets/images/bg.jpg
+category: 学习
+description: 公寓项目存档
+pubDate: 2024-12-07T16:00:00.000Z
+draft: true
+tags:
+  - springboot
+  - java
+title: 公寓项目存档
+---
+
+# 项目的配置命令存档
+
+## 1.数据库
+
+```shell
+# mysql 8.4 LTS版本
+
+docker pull mysql:8.4
+docker run -p 3306:3306 --name mysql01 \
+-v /volume/mysql01/var/lib/mysql:/var/lib/mysql \
+-v /volume/mysql01/etc/mysql/conf.d:/etc/mysql/conf.d \
+-v /volume/mysql01/var/log/mysql:/var/log/mysql \
+-e MYSQL_ROOT_PASSWORD=mysql321654987 \
+-d mysql:8.4
+
+sudo docker update mysql01 --restart=always
+
+touch /volume/mysql01/etc/mysql/conf.d/my.cnf
+vi /volume/mysql01/etc/mysql/conf.d/my.cnf
+
+# my.cnf配置文件
+[client]
+# MySQL 8.0移除了default-character-set配置项，使用charset代替
+# 设置mysql客户端连接服务端时默认使用的字符集
+# default-character-set=utf8  # 这行可以被删除
+# 使用以下行来设置客户端字符集（可选）
+# charset=utf8mb4
+[mysql]
+# MySQL 8.0移除了default-character-set配置项
+# 设置mysql客户端默认字符集
+# default-character-set=utf8  # 这行可以被删除
+# 使用以下行来设置客户端字符集（可选）
+# default-character-set=utf8mb4
+[mysqld]
+# 服务端使用的字符集默认为utf8mb4而不是utf8
+character-set-server=utf8mb4
+# 配置时区
+default-time_zone='+8:00'
+
+docker restart mysql01
+```
+
+```shell
+# redis 7.4
+docker pull redis:7.4
+mkdir -p /volume/redis01/etc/redis
+touch /volume/redis01/etc/redis/redis.conf
+
+docker run -p 6379:6379 --name redis01 \
+-v /volume/redis01/data:/data \
+-v /volume/redis01/etc/redis:/etc/redis \
+-d redis:7.4 redis-server /etc/redis/redis.conf
+
+sudo docker update redis01 --restart=always
+```
+
+```shell
+# minIO
+docker run \
+   -p 9000:9000 \
+   -p 9001:9001 \
+   --name minio01 \
+   -v /volume/minio01/data:/data \
+   -e "MINIO_ROOT_USER=root" \
+   -e "MINIO_ROOT_PASSWORD=minio321654987" \
+   -d minio/minio:RELEASE.2024-11-07T00-52-20Z server /data --console-address ":9001"
+
+sudo docker update minio01 --restart=always
+```
