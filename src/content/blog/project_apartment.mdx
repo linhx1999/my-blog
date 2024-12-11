@@ -1,10 +1,12 @@
 ---
 heroImage: /src/assets/images/bg.jpg
 category: 学习
-description: 公寓项目存档
+description: 留档一些java公寓项目的一些配置命令
 pubDate: 2024-12-07T16:00:00.000Z
 draft: true
 tags:
+  - redis
+  - mysql
   - springboot
   - java
 title: 公寓项目存档
@@ -16,40 +18,30 @@ title: 公寓项目存档
 
 ```shell
 # mysql 8.0 LTS版本
-
 docker pull mysql:8.0
+
+# 创建配置文件
+mkdir -p /volume/mysql01/etc/mysql/conf.d && tee /volume/mysql01/etc/mysql/conf.d/my.cnf << EOF
+# my.cnf配置文件
+[client]
+default-character-set=utf8mb4
+[mysql]
+default-character-set=utf8mb4
+[mysqld]
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+# 配置时区
+default_time_zone='+8:00'
+EOF
+
+# 运行docker容器
 docker run --name mysql01 \
 -p 3306:3306 \
 -v /volume/mysql01/var/lib/mysql:/var/lib/mysql \
 -v /volume/mysql01/etc/mysql/conf.d:/etc/mysql/conf.d \
--v /volume/mysql01/var/log/mysql:/var/log/mysql \
 -e MYSQL_ROOT_PASSWORD=root \
 --restart=always \
 -d mysql:8.0
-
-touch /volume/mysql01/etc/mysql/conf.d/my.cnf
-vi /volume/mysql01/etc/mysql/conf.d/my.cnf
-
-# my.cnf配置文件
-[client]
-# MySQL 8.0移除了default-character-set配置项，使用charset代替
-# 设置mysql客户端连接服务端时默认使用的字符集
-# default-character-set=utf8  # 这行可以被删除
-# 使用以下行来设置客户端字符集（可选）
-# charset=utf8mb4
-[mysql]
-# MySQL 8.0移除了default-character-set配置项
-# 设置mysql客户端默认字符集
-# default-character-set=utf8  # 这行可以被删除
-# 使用以下行来设置客户端字符集（可选）
-# default-character-set=utf8mb4
-[mysqld]
-# 服务端使用的字符集默认为utf8mb4而不是utf8
-character-set-server=utf8mb4
-# 配置时区
-default-time_zone='+8:00'
-
-docker restart mysql01
 ```
 
 ```shell
