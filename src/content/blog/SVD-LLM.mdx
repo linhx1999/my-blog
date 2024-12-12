@@ -1,0 +1,31 @@
+---
+heroImage: /src/assets/images/Screenshot 2024-12-12 094814.png
+category: 学习
+description: >-
+  对论文《SVD-LLM: Truncation-aware Singular Value Decomposition for Large Language
+  Model Compression》的阅读记录
+pubDate: 2024-12-11T16:00:00.000Z
+draft: true
+tags:
+  - llm
+  - decomposition
+  - svd
+title: SVD-LLM的阅读记录
+---
+
+# SVD-LLM: Truncation-aware Singular Value Decomposition for Large Language Model Compression
+
+## 链接：[https://arxiv.org/abs/2403.07378](https://arxiv.org/abs/2403.07378)
+
+## 关键词：模型压缩、SVD算法
+
+## 发现的问题：
+
+1. 一些方法在模型压缩比较高时表现出严重的性能下降；
+2. 模糊的数据预处理：尽管[ASVD](https://arxiv.org/abs/2312.05821)提出的数据预处理策略减少了异常激活值的负面影响，但它并未在奇异值与模型压缩损失值之间建立直接关系。
+3. SVD截断后的模型参数不会更新：为了补偿因截断大量奇异值而导致的精度下降，需要更新压缩模型中剩余的参数。但现有的基于SVD的大模型压缩方法并未考虑这种更新，因此在高模型压缩比下无法补偿精度下降。
+
+## 解决方法：
+
+1. 截断感知的数据白化：采用了一种截断感知的数据白化技术，确保奇异值与模型压缩损失之间存在直接映射。通过这种方式，所提出的截断感知数据白化技术能够识别出哪些奇异值应该被截断以最小化模型压缩损失。
+2. 逐层闭合形式模型参数更新：为了补偿高压缩比下精度的下降，采用了一种逐层闭合形式的模型参数更新策略，以逐层渐进地更新压缩后的权重。
