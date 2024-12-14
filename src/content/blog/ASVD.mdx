@@ -1,0 +1,42 @@
+---
+heroImage: /src/assets/images/Screenshot 2024-12-14 211605.png
+category: 学习
+description: >-
+  论文《ASVD: Activation-aware Singular Value Decomposition for Compressing Large
+  Language Models》的阅读记录
+pubDate: 2024-12-13T16:00:00.000Z
+draft: true
+tags:
+  - decomposition
+  - low-rank
+  - llm
+  - kv cache
+  - compression
+  - svd
+title: 论文《ASVD》的阅读记录
+---
+
+# ASVD: Activation-aware Singular Value Decomposition for Compressing Large Language Models
+
+## 链接：[https://arxiv.org/abs/2312.05821](https://arxiv.org/abs/2312.05821)
+
+## 一、发现的问题
+
+### 1.激活中的异常值可能会加剧分解误差
+
+![](</src/assets/images/Screenshot 2024-12-14 215257.png>)图中红色的数值是输入激活值（X）中的异常通道（outlier channels）。
+
+### 2.某些层对分解的敏感性高于其他层
+
+## 二、解决的方法
+
+### 1.基于激活值的SVD分解方法（ASVD: Activation-aware Singular Value Decomposition）
+
+* 在分解权重矩阵的过程中考虑激活值的分布
+* 通过一个缩放矩阵对权重矩阵的列进行变换。该缩放矩阵是基于跨输入激活通道的分布模式设计的。这种调整对于有异常值的激活尤为有益，使分解能够对这些特定的权重给予更多的关注
+
+### 2.基于敏感度的截断秩搜索机制（略）
+
+## 三、其他细节
+
+### 1.应用ASVD的KV缓存压缩
