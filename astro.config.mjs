@@ -4,6 +4,9 @@ import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import { remarkReadingTime } from './src/utils/readTime.ts'
 
+import rehypeKatex from 'rehype-katex'
+import remarkMath from 'remark-math'
+
 // https://astro.build/config
 export default defineConfig({
 	// site: 'https://blog-template-gray.vercel.app/', // Write here your website url
@@ -26,6 +29,8 @@ export default defineConfig({
 				  },
 				wrap: true
 			},
+			remarkPlugins: [remarkMath],
+			rehypePlugins: [rehypeKatex],
 			drafts: true
 		}),
 		sitemap(),
