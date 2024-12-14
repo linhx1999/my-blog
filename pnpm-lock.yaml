@@ -17,6 +17,9 @@ importers:
       astro-font:
         specifier: ^0.0.72
         version: 0.0.72
+      katex:
+        specifier: ^0.16.15
+        version: 0.16.15
       rehype-katex:
         specifier: ^7.0.1
         version: 7.0.1
