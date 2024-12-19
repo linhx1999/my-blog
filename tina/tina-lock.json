@@ -104,7 +104,7 @@
 				"namespace": ["post"]
 			}
 		],
-		"config": { "media": { "tina": { "publicFolder": "", "mediaRoot": "/src/assets/images" } } }
+		"config": { "media": { "tina": { "publicFolder": "public", "mediaRoot": "images" } } }
 	},
 	"lookup": {
 		"DocumentConnection": {

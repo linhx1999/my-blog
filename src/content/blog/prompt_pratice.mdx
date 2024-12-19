@@ -1,5 +1,5 @@
 ---
-heroImage: /src/assets/images/bg.jpg
+heroImage: /public/images/bg.jpg
 category: 学习
 description: 关于提示词工程的学习经验记录
 pubDate: 2024-08-31T16:00:00.000Z
@@ -19,9 +19,9 @@ title: 提示工程经验总结
 
 ### 参考资料：
 
-* [Claude提示工程](https://docs.anthropic.com/zh-CN/docs/build-with-claude/prompt-engineering/overview)
-* [openai提示工程](https://platform.openai.com/docs/guides/prompt-engineering)
-* [ChatGLM指令工程方法与实践](https://www.bilibili.com/video/BV1fw4m1k7Ea/?spm_id_from=333.1365.top_right_bar_window_custom_collection.content.click\&vd_source=6e29cbb374a8b5e5f6affc7894de614a)
+- [Claude提示工程](https://docs.anthropic.com/zh-CN/docs/build-with-claude/prompt-engineering/overview)
+- [openai提示工程](https://platform.openai.com/docs/guides/prompt-engineering)
+- [ChatGLM指令工程方法与实践](https://www.bilibili.com/video/BV1fw4m1k7Ea/?spm_id_from=333.1365.top_right_bar_window_custom_collection.content.click&vd_source=6e29cbb374a8b5e5f6affc7894de614a)
 
 ### 1.使用具体的工作步骤
 
@@ -34,6 +34,7 @@ example:
 
 ```markdown
 Use the following step-by-step instructions to respond to user inputs.
+
 1. action_1
 2. action_2
 3. aciont_3
@@ -49,15 +50,15 @@ XML（Extensible Markup Language，可扩展标记语言）是一种用于存储
 
 当提示涉及多个组件，如上下文、指令和示例时，XML标签可以成为游戏规则的改变者。它们可以构建一个清晰、良好的提示词结构，帮助大模型更准确地解析你的提示，从而产生更高质量的输出。
 
-* **清晰度**：清晰地分隔提示的不同部分，确保提示结构良好。
-* **准确性**：减少由大模型误解提示部分而导致的错误。例如使用诸如\<instructions>、\<example>和\<formatting>之类的标签来清晰地分隔提示的不同部分。这可以防止大模型混淆指令、示例和上下文。
-* **灵活性**：容易复用，轻松找到、添加、删除或修改提示的部分，而无需重写所有内容。
-* **可解析性**：让大模型在其输出中使用XML标签，使得通过后处理更容易提取其响应的特定部分。
+- **清晰度**：清晰地分隔提示的不同部分，确保提示结构良好。
+- **准确性**：减少由大模型误解提示部分而导致的错误。例如使用诸如\<instructions>、\<example>和\<formatting>之类的标签来清晰地分隔提示的不同部分。这可以防止大模型混淆指令、示例和上下文。
+- **灵活性**：容易复用，轻松找到、添加、删除或修改提示的部分，而无需重写所有内容。
+- **可解析性**：让大模型在其输出中使用XML标签，使得通过后处理更容易提取其响应的特定部分。
 
 #### 最佳实践：
 
-* **保持一致性**：在整个提示中使用相同的标签名称，并在谈论内容时引用这些标签名称（例如，使用\<contract>标签中的合同来...）。
-* **嵌套标签**：对于层次结构内容，你应该嵌套标签
+- **保持一致性**：在整个提示中使用相同的标签名称，并在谈论内容时引用这些标签名称（例如，使用\<contract>标签中的合同来...）。
+- **嵌套标签**：对于层次结构内容，你应该嵌套标签
 
 ```xml
 <outer>
@@ -67,7 +68,7 @@ XML（Extensible Markup Language，可扩展标记语言）是一种用于存储
 </outer>
 ```
 
-* **将XML标签与其他技术结合使用**：如多样本提示（\<examples>）或思维链（\<thinking>、\<answer>）。这将创建超结构化、高性能的提示。
+- **将XML标签与其他技术结合使用**：如多样本提示（\<examples>）或思维链（\<thinking>、\<answer>）。这将创建超结构化、高性能的提示。
 
 #### 常用标签例子:
 
@@ -140,9 +141,9 @@ Use the following step-by-step instructions to respond to user inputs.
 
 #### 为什么使用示例？
 
-* 准确性: 示例减少对指令的误解。
-* 一致性: 示例强制执行统一的结构和风格。
-* 性能: 精心选择的示例提升Claude处理复杂任务的能力。
+- 准确性: 示例减少对指令的误解。
+- 一致性: 示例强制执行统一的结构和风格。
+- 性能: 精心选择的示例提升Claude处理复杂任务的能力。
 
 示例最好使用\<example>标签包裹（如果有多个，则嵌套在\<examples>标签内）以保持结构。
 
@@ -163,9 +164,9 @@ example:
 
 #### 优势：
 
-* 准确性：逐步解决问题可以减少错误，尤其是在数学、逻辑、分析或一般复杂任务中。
-* 连贯性：结构化思考生成更加连贯、组织良好的回答。
-* 调试：查看大模型的思考过程有助于找出提示词中可能不清晰的地方。
+- 准确性：逐步解决问题可以减少错误，尤其是在数学、逻辑、分析或一般复杂任务中。
+- 连贯性：结构化思考生成更加连贯、组织良好的回答。
+- 调试：查看大模型的思考过程有助于找出提示词中可能不清晰的地方。
 
 #### 劣势：
 
@@ -181,6 +182,6 @@ example:
 
 不同的角色会对不同的数据有不同的理解。
 
-* **增强准确性：**在法律分析或财务建模等复杂场景中，角色提示可以显著提升Claude的表现。
-* **定制语气：**无论您需要的是CFO的简洁风格还是文案写作的独特风格，角色提示都能调整大模型的沟通方式。
-* **提升专注度：**通过设定角色背景，大模型能更好地围绕任务的具体要求展开工作。
+- **增强准确性：**在法律分析或财务建模等复杂场景中，角色提示可以显著提升Claude的表现。
+- **定制语气：**无论您需要的是CFO的简洁风格还是文案写作的独特风格，角色提示都能调整大模型的沟通方式。
+- **提升专注度：**通过设定角色背景，大模型能更好地围绕任务的具体要求展开工作。

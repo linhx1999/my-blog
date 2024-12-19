@@ -1,5 +1,5 @@
 ---
-heroImage: /src/assets/images/MongoDB-Logo.png
+heroImage: /public/images/MongoDB-Logo.png
 category: 学习
 description: mongo使用经验
 pubDate: 2024-08-02T16:00:00.000Z
@@ -17,13 +17,13 @@ title: mongo使用经验
 
 ### 参考连接:
 
-* [docker安装](https://linhx1999.github.io/post/docker20247/)
-* [mongo身份验证](https://www.mongodb.com/zh-cn/docs/manual/tutorial/configure-scram-client-authentication/)
+- [docker安装](https://linhx1999.github.io/post/docker20247/)
+- [mongo身份验证](https://www.mongodb.com/zh-cn/docs/manual/tutorial/configure-scram-client-authentication/)
 
 #### 0. 环境
 
-* ubuntu 22.04
-* docker
+- ubuntu 22.04
+- docker
 
 #### 1. 安装和运行:
 
@@ -70,7 +70,7 @@ for r in res:
 # 不需要提前创建数据库，插入数据的时候会自动创建数据库
 db = mongo_client.get_database("data_analysis")
 # 选择集合，和数据库一样不需要提取创建
-collection = db['journal_article'] 
+collection = db['journal_article']
 ```
 
 ```python
@@ -93,7 +93,7 @@ collection.delete_one({"id": "test"})
 
 # 更新操作
 collection.update_one(
-    {"id": result["id"]}, 
+    {"id": result["id"]},
     update={
         "$set": {
             "class": "test"

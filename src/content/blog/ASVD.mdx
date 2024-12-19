@@ -1,5 +1,5 @@
 ---
-heroImage: /src/assets/images/Screenshot 2024-12-14 211605.png
+heroImage: /public/images/Screenshot 2024-12-14 211605.png
 category: 学习
 description: >-
   论文《ASVD: Activation-aware Singular Value Decomposition for Compressing Large
@@ -30,8 +30,8 @@ title: 论文《ASVD》的阅读记录
 
 **1.基于激活值的SVD分解方法（ASVD: Activation-aware Singular Value Decomposition）**
 
-* 在分解权重矩阵的过程中考虑激活值的分布
-* 通过一个缩放矩阵S对权重矩阵的列进行变换。该缩放矩阵是基于跨输入激活通道的分布模式设计的。这种调整对于有异常值的激活尤为有益，使分解能够对这些特定的权重给予更多的关注
+- 在分解权重矩阵的过程中考虑激活值的分布
+- 通过一个缩放矩阵S对权重矩阵的列进行变换。该缩放矩阵是基于跨输入激活通道的分布模式设计的。这种调整对于有异常值的激活尤为有益，使分解能够对这些特定的权重给予更多的关注
 
 **2.基于敏感度的截断秩搜索机制（略）**
 
