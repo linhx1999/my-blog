@@ -18,8 +18,8 @@ export default defineConfig({
 			// mediaRoot: '/src/assets/images',
 			// publicFolder: ''
 
-			mediaRoot: 'images',
-			publicFolder: 'public'
+			mediaRoot: '/public/images',
+			publicFolder: ''
 		}
 	},
 	schema: {
