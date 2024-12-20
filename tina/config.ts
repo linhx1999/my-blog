@@ -90,18 +90,18 @@ export default defineConfig({
 						isBody: true,
 						templates: [
 							// Custom Components
-							{
-								label: 'SButton',
-								name: 'SButton',
-								fields: [
-									{
-										type: 'rich-text',
-										label: 'SButton',
-										name: 'children',
-										isBody: true
-									}
-								]
-							}
+							// {
+							// 	label: 'SButton',
+							// 	name: 'SButton',
+							// 	fields: [
+							// 		{
+							// 			type: 'rich-text',
+							// 			label: 'SButton',
+							// 			name: 'children',
+							// 			isBody: true
+							// 		}
+							// 	]
+							// }
 						]
 					}
 				]

@@ -78,24 +78,7 @@
 						"label": "Body",
 						"name": "SButton",
 						"isBody": true,
-						"templates": [
-							{
-								"label": "SButton",
-								"name": "SButton",
-								"fields": [
-									{
-										"type": "rich-text",
-										"label": "SButton",
-										"name": "children",
-										"isBody": true,
-										"namespace": ["post", "SButton", "SButton", "children"],
-										"searchable": true,
-										"parser": { "type": "mdx" }
-									}
-								],
-								"namespace": ["post", "SButton", "SButton"]
-							}
-						],
+						"templates": [],
 						"namespace": ["post", "SButton"],
 						"searchable": true,
 						"parser": { "type": "mdx" }
@@ -986,31 +969,6 @@
 			},
 			{
 				"kind": "InputObjectTypeDefinition",
-				"name": { "kind": "Name", "value": "PostSButtonSButtonFilter" },
-				"fields": [
-					{
-						"kind": "InputValueDefinition",
-						"name": { "kind": "Name", "value": "children" },
-						"type": { "kind": "NamedType", "name": { "kind": "Name", "value": "RichTextFilter" } }
-					}
-				]
-			},
-			{
-				"kind": "InputObjectTypeDefinition",
-				"name": { "kind": "Name", "value": "PostSButtonFilter" },
-				"fields": [
-					{
-						"kind": "InputValueDefinition",
-						"name": { "kind": "Name", "value": "SButton" },
-						"type": {
-							"kind": "NamedType",
-							"name": { "kind": "Name", "value": "PostSButtonSButtonFilter" }
-						}
-					}
-				]
-			},
-			{
-				"kind": "InputObjectTypeDefinition",
 				"name": { "kind": "Name", "value": "PostFilter" },
 				"fields": [
 					{
@@ -1051,10 +1009,7 @@
 					{
 						"kind": "InputValueDefinition",
 						"name": { "kind": "Name", "value": "SButton" },
-						"type": {
-							"kind": "NamedType",
-							"name": { "kind": "Name", "value": "PostSButtonFilter" }
-						}
+						"type": { "kind": "NamedType", "name": { "kind": "Name", "value": "RichTextFilter" } }
 					}
 				]
 			},
