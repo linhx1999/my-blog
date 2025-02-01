@@ -30,6 +30,28 @@ Adding a post is as simple as adding a .md or .mdx file to the blog folder at th
 
 For example, if you have a file named **jsx-and-react.md**, it will be transformed into: **http://yourdomain.com/post/jsx-and-react/**
 
+Example :
+
+```mk
+---
+heroImage: /src/assets/4jhau2076uhb1.png
+category: 学习
+description: test
+pubDate: 2024-12-19
+draft: false
+tags:
+  - tag_test1
+  - tag_test2
+title: test
+---
+
+test
+
+![](</src/assets/屏幕截图 2024-08-02 140056.png>)
+
+
+```
+
 ## 📝 Activating draft mode
 
 To activate draft mode, add the property **draft: true** to the file, and it will no longer be displayed on the blog.
