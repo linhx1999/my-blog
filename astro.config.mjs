@@ -19,9 +19,9 @@ export default defineConfig({
 			wrap: true
 		}
 	},
-	image: {
-		domains: ["assets.tina.io"],
-	},
+	// image: {
+	// 	domains: ["assets.tina.io"],
+	// },
 	integrations: [
 		mdx({
 			syntaxHighlight: 'shiki',
